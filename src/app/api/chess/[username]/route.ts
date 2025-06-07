@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { username: string } }
+  { params }: { params: Promise<{ username: string }> }
 ) {
-  const username = params.username;
+  const { username } = await params;
 
   try {
     const userAgent = 'check-please/0.1.0 (https://github.com/hafeezhmha/checkplease)';
