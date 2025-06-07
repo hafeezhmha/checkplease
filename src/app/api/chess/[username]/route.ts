@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+type RouteContext = {
+  params: {
+    username: string;
+  };
+};
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { username: string } }
+  { params }: RouteContext
 ) {
   const username = params.username;
 
