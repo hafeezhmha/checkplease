@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  context: { params: { username: string } }
+  { params }: { params: { username: string } }
 ) {
-  const { username } = context.params;
+  const username = params.username;
 
   try {
-    const userAgent = 'check-please/0.1.0 (https://github.com/your-repo/check-please)';
+    const userAgent = 'check-please/0.1.0 (https://github.com/hafeezhmha/checkplease)';
 
     const [profileResponse, statsResponse] = await Promise.all([
       fetch(`https://api.chess.com/pub/player/${username}`, {
