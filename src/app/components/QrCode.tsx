@@ -1,5 +1,5 @@
 import React from 'react';
-import QRCode from 'qrcode.react';
+import QRCode from 'react-qr-code';
 
 interface QrCodeProps {
   url: string;
@@ -7,16 +7,12 @@ interface QrCodeProps {
 
 export const QrCode: React.FC<QrCodeProps> = ({ url }) => {
   return (
-    <div className="w-full h-auto">
+    <div className="w-32 h-32 p-2 bg-white">
       <QRCode
         value={url}
         size={128}
-        bgColor={"#ffffff"}
-        fgColor={"#000000"}
-        level={"L"}
-        includeMargin={false}
-        style={{ width: '100%', height: 'auto' }}
-        renderAs="canvas"
+        style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+        viewBox={`0 0 128 128`}
       />
     </div>
   );
