@@ -49,31 +49,31 @@ export const Receipt: React.FC<ReceiptProps> = ({ profile, stats, lastGame, forw
   const randomQuote = gothamQuotes[Math.floor(Math.random() * gothamQuotes.length)];
 
   return (
-    <div className="receipt-container">
-      <div className="coffee-stain" />
-      <div ref={forwardedRef} className="receipt-content w-full max-w-[88mm] bg-white text-black p-4 sm:p-6 font-mono text-[11px] sm:text-xs leading-relaxed">
-        <div className="text-center mb-6">
-          <h2 className="text-base sm:text-lg font-bold">CHECKPLEASE!</h2>
-          <p>{new Date().toLocaleDateString('en-US', {
+    <div className="receipt-container relative mx-auto my-8">
+      <div className="coffee-stain absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <div ref={forwardedRef} className="receipt-content w-full max-w-[88mm] bg-white text-black p-5 sm:p-7 font-mono text-[12px] sm:text-sm leading-relaxed border border-gray-200 rounded-lg shadow-xl">
+        <div className="text-center mb-8">
+          <h2 className="text-lg sm:text-xl font-bold mb-2 text-gray-900">CHECKPLEASE!</h2>
+          <p className="text-xs sm:text-sm text-gray-700">{new Date().toLocaleDateString('en-US', {
             weekday: 'long',
             month: 'long',
             day: 'numeric',
             year: 'numeric'
           }).toUpperCase()}</p>
-          <p className="mt-1 opacity-75">ORDER #{String(Math.floor(Math.random() * 9999)).padStart(4, '0')}</p>
+          <p className="mt-2 text-xs opacity-75 text-gray-600">ORDER #{String(Math.floor(Math.random() * 9999)).padStart(4, '0')}</p>
         </div>
 
-        <div className="mb-4 flex items-center">
-          {profile.avatar && <img src={profile.avatar} alt="avatar" className="w-12 h-12 rounded-full mr-4" />}
+        <div className="mb-6 flex items-center bg-gray-50 p-3 rounded-md shadow-sm">
+          {profile.avatar && <img src={profile.avatar} alt="avatar" className="w-14 h-14 rounded-full mr-4 border-2 border-gray-300 shadow" />}
           <div>
-            <p>CUSTOMER: {profile.title && `${profile.title} `}{profile.name || profile.username}</p>
-            <p className="opacity-75">@{profile.username} ({profile.status})</p>
-            {profile.location && <p className="opacity-75">{profile.location}</p>}
+            <p className="font-bold text-gray-800 text-sm">CUSTOMER: {profile.title && `${profile.title} `}{profile.name || profile.username}</p>
+            <p className="opacity-85 text-gray-700 text-xs">@{profile.username} ({profile.status})</p>
+            {profile.location && <p className="opacity-85 text-gray-700 text-xs">{profile.location}</p>}
           </div>
         </div>
 
-        <div className="border-t border-b border-dashed py-3 mb-4">
-          <table className="w-full">
+        <div className="border-t border-b border-dashed border-gray-300 py-4 mb-6">
+          <table className="w-full text-sm">
             <tbody>
               {stats.chess_rapid && <StatRow label="RAPID" value={stats.chess_rapid.last?.rating} best={stats.chess_rapid.best?.rating} url={stats.chess_rapid.best?.game} />}
               {stats.chess_blitz && <StatRow label="BLITZ" value={stats.chess_blitz.last?.rating} best={stats.chess_blitz.best?.rating} url={stats.chess_blitz.best?.game} />}
@@ -85,38 +85,38 @@ export const Receipt: React.FC<ReceiptProps> = ({ profile, stats, lastGame, forw
         </div>
 
         {(stats.chess_rapid || stats.chess_blitz || stats.chess_bullet) &&
-          <div className="mb-4">
-            <p>W/L/D RECORDS:</p>
-            {stats.chess_rapid && <p>RAPID: {stats.chess_rapid.record.win} / {stats.chess_rapid.record.loss} / {stats.chess_rapid.record.draw}</p>}
-            {stats.chess_blitz && <p>BLITZ: {stats.chess_blitz.record.win} / {stats.chess_blitz.record.loss} / {stats.chess_blitz.record.draw}</p>}
-            {stats.chess_bullet && <p>BULLET: {stats.chess_bullet.record.win} / {stats.chess_bullet.record.loss} / {stats.chess_bullet.record.draw}</p>}
+          <div className="mb-6 p-3 bg-gray-50 rounded-md shadow-sm">
+            <p className="font-bold text-gray-800 text-sm mb-2">W/L/D RECORDS:</p>
+            {stats.chess_rapid && <p className="text-xs text-gray-700">RAPID: {stats.chess_rapid.record.win} / {stats.chess_rapid.record.loss} / {stats.chess_rapid.record.draw}</p>}
+            {stats.chess_blitz && <p className="text-xs text-gray-700">BLITZ: {stats.chess_blitz.record.win} / {stats.chess_blitz.record.loss} / {stats.chess_blitz.record.draw}</p>}
+            {stats.chess_bullet && <p className="text-xs text-gray-700">BULLET: {stats.chess_bullet.record.win} / {stats.chess_bullet.record.loss} / {stats.chess_bullet.record.draw}</p>}
           </div>
         }
 
-        <div className="border-t border-dashed pt-3 mb-4">
-            <div className="flex justify-between"><span>JOINED:</span> <span>{new Date(profile.joined * 1000).toLocaleDateString()}</span></div>
-            <div className="flex justify-between"><span>FOLLOWERS:</span> <span>{profile.followers}</span></div>
-            {lastGame && <div className="flex justify-between"><span>LAST OPENING:</span> <span className="truncate">{lastOpening}</span></div>}
+        <div className="border-t border-dashed border-gray-300 pt-4 mb-6 text-sm text-gray-700">
+            <div className="flex justify-between mb-1"><span>JOINED:</span> <span>{new Date(profile.joined * 1000).toLocaleDateString()}</span></div>
+            <div className="flex justify-between mb-1"><span>FOLLOWERS:</span> <span>{profile.followers}</span></div>
+            {lastGame && <div className="flex justify-between"><span>LAST OPENING:</span> <span className="truncate max-w-[60%] text-right">{lastOpening}</span></div>}
         </div>
 
-        <div className="text-center opacity-75 my-4">
-          <p className="italic">"{randomQuote}"</p>
+        <div className="text-center opacity-85 my-6 text-gray-800">
+          <p className="italic text-sm">"{randomQuote}"</p>
         </div>
 
-        <div className="text-center opacity-75 my-4">
+        <div className="text-center opacity-75 my-6 text-gray-600 text-xs">
           <p>Served by: {serverName}</p>
           <p>{new Date().toLocaleTimeString()}</p>
         </div>
 
-        <div className="text-center">
-          <p className="mb-4">THANK YOU FOR PLAYING!</p>
-          <div className="w-full h-auto flex justify-center">
+        <div className="text-center pt-4 border-t border-dashed border-gray-300">
+          <p className="mb-4 text-sm font-bold text-gray-900">THANK YOU FOR PLAYING!</p>
+          <div className="w-full h-auto flex justify-center mb-2">
             <QrCode url={profile.url} />
           </div>
-          <p className="mt-2 opacity-75">{profile.url.replace('https://www.chess.com/member/', '')}</p>
+          <p className="mt-2 opacity-75 text-gray-600 text-xs">{profile.url.replace('https://www.chess.com/member/', '')}</p>
         </div>
       </div>
-      <div className="receipt-fade" />
+      <div className="receipt-fade absolute inset-0" />
     </div>
   );
 };
