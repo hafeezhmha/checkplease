@@ -2,8 +2,6 @@
 
 A fun and engaging web application that generates a receipt-style summary of your Chess.com stats and recent activity. Share your chess journey with style!
 
-![CheckPlease! Screenshot](screenshot.png)
-
 ## ✨ Features
 
 - 📊 Display your Chess.com stats in a retro receipt format
